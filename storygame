@@ -1,0 +1,1006 @@
+__author__ = "Wouter van de Koppel & Tom Veeren"
+__copyright__ = "Copyright (C) 2018 Wouter van de Koppel & Tom Veeren"
+
+#imports
+import random
+import time
+
+# player functions
+player = {'weapon': None, 'race': None, 'health': None, 'hunger': None, 'legs': None, 'soulvision': None, 'bloodmage': None}
+playerchoices = {'hut_mountain': None, 'kill_hut_npc': None, 'eat_heart': None, 'found_portal': None, 'devour_npc': None, 'knocked': None}
+name = 'my friend'
+
+def enter():
+  input()
+
+def choose(string):
+  while True:
+      answer = input(string)
+      while answer.lower() not in ("1","2"):
+          print("Choose 1 or 2 and press enter.")
+          answer = input(string)
+      if answer == "1" or "2":
+          return str(answer)
+
+def choose3(string):
+  while True:
+      answer = input(string)
+      while answer.lower() not in ("1","2","3"):
+          print("Choose 1, 2 or 3 and press enter.")
+          answer = input(string)
+      if answer == "1" or "2" or "3":
+          return str(answer)
+
+def openanswer(string):
+  while True:
+      answer = input(string)
+      while answer == "":
+          print("Type something and press enter.")
+          answer = input(string)
+      if answer != "":
+          return str(answer)
+   
+
+#Try again Loop
+play = True
+
+#play again
+def play_again():
+    again=str(input("Continue?\n (1) yes\n (2) no\n "))
+    if again == "2":
+      game()
+    if again == "1":
+      ch1()
+
+# npc functions
+def villager():
+  responses = ['"You have come far..."', '"The wet nature of choice has set you on a slippery slope to this place..."', '"I used to be an adventurer like you.. until I took an arrow in the knee."']
+  npcnamechoice = ["Sjonny", "Soli", "Feathers", "Koppel", "Dencher", "Juicy", "Shifty", "Stuff", "Gijs", "Verm", "J'asperque", "Cow, of House Casterly", "Pompeius Dominus", "Jeronimo", "Ardjee", "York", "Lord Marshmellow"]
+  npcname = random.choice(npcnamechoice)
+  
+  npc_interaction = choose('['+npcname+':] "Greetings.. I am the one called '+npcname+', Will you speak to me? Choose wisely..."\n (1) Talk to '+npcname+'\n (2) Say nothing.\n ')
+  
+  if npc_interaction in ['1']:
+    print("["+npcname+":] " +random.choice(responses))
+    enter()
+        
+    if playerchoices['eat_heart'] == 'yes':
+      print('"I did not think you had the balls to do it, you know.. I did naaaaht!"')
+      enter()
+      print('"Do you even have a clue what raw power was within that heart?"')
+      enter()
+      ch1_npc_1 = choose(' (1) "I did not eat it, it is not true. It is bullshit!"\n (2) "Yes... it was me."\n ')
+      if ch1_npc_1 in ['1']:
+        print('['+npcname+':]"Oh hi '+name+', I did not know it was you."')
+        enter()
+      if ch1_npc_1 in ['2']:
+        print('['+npcname+':]"I just.. wanna watch you guys."')
+        enter()
+
+    elif playerchoices['eat_heart'] == 'None':
+      print('"I see you have found your way to my heart."')
+      enter()
+    
+    if player['legs'] == 'broken':
+      print('"Your legs might have been broken.. but not your will."')
+      enter()
+      print('" .. Good."')
+      enter()
+    
+    if player['race'] == 'Amun':
+      print("I expected nothing from the chicken that you are. But still, here we are.")
+    
+    if player['race'] == 'Sobek':
+      print("Without me guiding your hand you would still be dead in the water, waiting for the opportunity which never came.")
+    
+    if player['race'] == 'Inepu':
+      print("Such wasted talent.. still, it would also be a waste just to put you down.")
+
+    if playerchoices['found_portal'] == 'yes':
+      print('"You have seen that there are ways out of this world. Is this not what you have always wanted? A way out?""')
+      ch1_npc_4 = choose(' (1) "You know nothing of me..."\n (2) "..it is the truth."')
+      if ch1_npc_4 in ['1']:
+        print('"Ha ha heh. Maybe I know more than you think I do.. '+name+'.')
+      elif ch1_npc_4 in ['2']:
+        print('"..you cannot escape your fate. Or can you?"')
+        enter()
+        print('"Do any of our choices really matter, in the end?"')
+        enter()
+        print('"I want to find out.. What say you?"')
+        ch1_npc_5 = choose(' (1) "Teach me." \n (2) "I will follow my own path."')
+        if ch1_npc_5 in ['1']:
+          print("placeholder")
+        if ch1_npc_5 in ['2']:
+          print("placeholder")
+    
+    enter()
+    print(npcname+" pauses for a moment and stares intensely at you. Perhaps to test you...")
+    enter()
+    if player['weapon'] == 'red_orb':
+      print("As you hold the red orb tightly in your pocket, you can feel a burning sensation arising from your palm.")
+      enter()
+      ch1_npc_2 = choose(" (1) Ignite your hand into flame and attack\n (2) Hold it in\n ")
+      if ch1_npc_2 in ['1']:
+        print("As you pull out your hand from your pocket, your hand erupts in flame, embers flying from your claws.")
+        enter()
+        print("You lunge forward, slashing wildly at "+npcname+"'s head.")
+        enter()
+        print('['+npcname+':] "You have taken the orb? This is not as..AAHHGGHRRR"')
+        enter()
+        print("Your burning claw slashes deep into the neck of "+npcname+". Slicing open its throat.")
+        enter()
+        print("As "+npcname+" falls to the ground, its body bursts into flame.")
+        enter()
+        print("You slowly walk to the now burning body of "+npcname+". It points at you.")
+        enter()
+        print('['+npcname+':] "Glllrrrgguurrrllggg."')
+        enter()
+        oneliner = input("What do you say to "+npcname+"?\n ")
+        enter()
+        print("The flames spread quickly through the old hut, feasting upon the straw and the wood.")
+        enter()
+        print("You manage to escape through the door just before the roof collapses in.")
+        enter()
+        print("After a few strides, you turn around to watch the old hut burn.")
+        enter()
+        hunger_increases()
+        enter()
+        print('['+npcname+':] "Heh."')
+        enter()
+        print('['+npcname+':] "'+oneliner+', good one. I have to remember that."')
+        enter()
+        print(npcname+' waves with his hand. From the ashes of the old hut, purple sparks fly up, mingling with the dancing flames to light the ominous sky.')
+        enter()
+        print('The sparks and flames melt together into an oval, hovering just above the ground. A strangely inviting shimmering light fills it.')
+        enter()
+        print('Time for you to start your first challenge,'+name+'. And with a flick of his hand he flings you through the portal.')
+        enter()
+    if player['weapon'] == 'scalpel':
+      print("You still have the scalpel in your hand...")
+      enter()
+      ch1_npc_3 = choose(" (1) Lunge forward with the scalpel\n (2) Wait\n ")
+      if ch1_npc_3 in ['1']:
+        print("\nYou lunge forward with the scalpel towards "+npcname+".")
+        enter()
+        print('['+npcname+']:"Aaarrrghhhhl!!"')
+        enter()
+        print("You manage to pierce "+npcname+"'s skin. Black blood sprays out over your face.")
+        enter()
+        print('For a moment you see nothing, after a moment your vision restores.')
+
+    
+    print("You see before you a vague shimmering of a hall.") 
+    enter()
+    print("You get the feeling that you want to go in.")
+    enter()
+    print("Your body starts moving out of its own. Your mind is hypnotised by the ever moving image before you…")
+    enter()
+    print("Your feet move you closer, you can see it better now.") 
+    enter()
+    print("It is the hall of king. Of a god…") 
+    enter()
+    print("You feel yourself pulled in. First there’s no light, no sound, no nothing.")
+    enter()
+    print("It feels like it takes ages, but then out of nothing it feels like your body implodes.") 
+    enter()
+    print("The pain, the horror, the suffering... It’s nothing like you felt before and when it stops you lay with agonizing pain on the floor of a hall.")
+    enter()
+    print("Before you you see a throne… Your throne.")
+    enter()
+
+  elif npc_interaction in ['2']:
+    print("["+npcname+":] Goodbye.. old friend.")
+    enter()
+    print(npcname+" turns into stone and then crumbles into dust.")
+    enter()
+
+# Race selection function
+def race_selection():
+  print("The wind rustles through the trees. Red and yellow leafs fall down around you.")
+  enter()
+  print("One lands upon your arm.")
+  enter()
+  print("It makes you think of...")
+  enter()
+  race = choose3(" (1) The gentle winds of your home in the Skylands\n (2) The forests of the Marshes.\n (3) Nothing… You are from the Great Wastelands.\n ")
+    
+  
+  if race in ['1']: #The Skylands - Race: Amun
+    print("The winds have always carried you where you need to go in the Skylands.")
+    enter()
+    print("But just like this leaf, you have fallen from a place in the sun.")
+    enter()
+    print("You remember now.. that you are of the Amun.")
+    player['race'] = 'Amun'
+    
+
+  elif race in ['2']: #The Marshes - Race: Sobek
+    print("You were surrounded by trees all your youth, sheltering the Marshes from the outside world.")
+    enter()
+    print("But just like the trees who drop their leaves, you have shed your skin.")
+    enter()
+    print("You stand still for a moment and touch your arm.. you are of the Sobek.")
+    player['race'] = 'Sobek'
+
+  elif race in ['3']: #The Great Waste - Race: Inepu
+    print("You feel like that everything you touched has always withered away, just like the yellow leaf on your arm.")
+    enter()
+    print("How will this foreign place react to your touch?")
+    enter()
+    print("You try to shake the memories away, but you cannot deny that you are of the Inepu.")
+    player['race'] = 'Inepu'
+
+#game over functions
+def hunger_increases():
+  player['hunger'] = player['hunger']+1
+  print("While you are wasting time, your hunger increases.. You must find food before it overwhelms you.")
+  game_over()
+
+def hunger_decreases():
+  player['hunger'] = 0
+  print("Your hunger fades away.. It is as if you can finally think clearly.")
+
+def try_again():
+  print("Just before you die, you can hear a voice inside your head speaking to you, as a sharp whisper it overrides all thoughts.\n\nYou have failed. Try again.")
+  play_again()
+
+
+def game_over():
+  if player['hunger'] == 3:
+    print("\nYou collapse to the ground out of exhaustion. Your body cannot continue without food. Extreme pains form inside your stomach and spread throughout your limbs.")
+    enter()
+    try_again()
+  elif player['health'] == 0:
+    try_again()
+
+#Story blocks chapter 1
+def old_hut(): #Location old hut
+  print("You arrive at the old hut.")
+  enter()
+  ch2A = choose(" (1) Enter the old hut.\n (2) Walk around the old hut.\n ")
+  
+  if ch2A in ['1']: #Entered old hut
+    print("You enter the old hut.")
+    enter()
+    if playerchoices['hut_mountain'] == "hut":
+      print("Once you enter the old hut, you are greeted by an unfamiliar smell.")
+      enter()
+      print("You look around, trying to determine where the smell comes from, when you catch a glimpse of something passing by the window.")
+      enter()
+      hut_npc = openanswer("You can only describe it as a(n): ")
+      ch3A = choose("\n (1) Hide in closet.\n (2) Look for a weapon.\n ")
+      
+      if ch3A in ['1']: #Hid in closet
+        print("You quickly look around you and see a large closet.")
+        enter()
+        print("Its door is open and you can see in the dim light that it is not filled with anything.")
+        enter()
+        print("You swiftly move towards it, step inside and close the door.")
+        enter()
+        print("You can hear someone entering the hut.")
+        enter()
+        print("You can hear the footsteps coming closer...")
+        enter()
+        ch4A = choose(" (1) Ambush\n (2) Stay hidden.\n" )
+        
+        if ch4A in ['1']: #Ambushed hut_npc
+          
+          if player['race'] == 'Sobek':
+            print("A scream fills the room. A look of terror and despair fills the eyes of the", hut_npc + ", as you burst out of the closet. Your primal instinct rages as you close your long jaws around the", hut_npc + "'s neck.")
+            enter()
+            print("The lifeless body of the", hut_npc + "now lies before you.")
+            playerchoices['kill_hut_npc'] = 'yes'
+            ch1_5 = choose("(1) Devour the "+hut_npc+" \n (2) Inspect the closet\n ")
+            
+            if ch1_5 in ['1']:
+              print("You feast upon the flesh of your new made enemy.")
+              enter()
+              print("When you are done, you are covered in blood... but satisfied.")
+              enter()
+              hunger_decreases()
+              playerchoices[devour_np] = 'yes'
+
+            if ch1_5 in ['2']:
+              print("You will not lower yourself to such barbarisms.")
+              playerchoices[devour_np] = 'no'
+              enter()
+              hunger_increases()
+              enter()
+              print("Perhaps there is some food in the closet?")
+              enter()
+              print("You step back into the closet. Now that you have more time to inspect it, your eyes are drawn towards a white shimmering light.")
+              enter()
+              print("To your surprise, you see...")
+              enter()
+              print("Snow.. and amidst the snow, a lonely black tower.") 
+              enter()
+              print("After a moment you realize that you are looking through some sort of portal.")
+              playerchoices['found_portal'] = 'yes'
+              enter()
+              ch5A = choose(" (1) Enter the portal\n (2) Come out of the closet.\n ")
+              if ch5A in ['1']:
+                print("You stick out your hand through the portal.")
+                enter()
+                print("You can feel cold winds pulling on your arm...")
+                enter()
+                print("The pull gets stronger and is pulling you in.")
+                enter()
+                print("You can hear footsteps behind you, coming closer.")
+                enter()
+                print("*plop*")
+
+          else:
+            print("With a loud roar, you burst out of your hiding spot and jump on the", hut_npc + ".")
+            enter()
+            print("While you are struggling with the "+hut_npc+", you feel that there is more power to this creature than you thought.")
+            enter()
+            ch1_fight_talk = choose("You can hear the "+hut_npc+" trying to say something to you. What will you do?\n\n (1) Talk to the "+hut_npc+".\n (2) Try to kill the "+hut_npc+" ")
+            
+            if ch1_fight_talk in ['1']: #fight
+              enter()
+              print("You release the "+hut_npc+". Who, after panting for a few seconds. Starts talking...")
+              enter()
+              villager()
+            
+            else: #talk
+              enter()
+              print("You will not risk the chance of being put under a spell. Through your determination, you gain the upper hand and snap the neck of the "+hut_npc+".")
+              playerchoices['kill_hut_npc'] = 'yes'
+              enter()
+              ch1_5 = choose(" (1) Devour the "+hut_npc+"\n (2) Leave it\n ")
+              enter()
+              
+              if ch1_5 in ['1']:
+                enter()
+                print("You feast upon the flesh of the "+hut_npc+". When you are done, you are covered in blood.. but satisfied.")
+                hunger_decreases()
+              
+              elif ch1_5 in ['2']:
+                hunger_increases()
+                print("You will not fall back to such barbarism.. yet.")
+                playerchoices[devour_np] = 'yes'
+
+                              
+        
+        elif ch4A in ['2']: #Stayed hidden
+          print("You stay hidden for a while, as you hear "+hut_npc+" scurrying around the hut.")
+          enter()
+          print("You notice that the funk of this hut is even more stronger in this closet...")
+          enter()
+          print("... You also hear a faint, tingling sound behind you. its is somehow playing your mind like a harp.")
+          enter()
+          print("When you carefully turn yourself around in the closet, you can see...")
+          enter()
+          print("Snow.. and amidst the snow, a lonely black tower. After a moment you realize that you are looking through some sort of portal.")
+          playerchoices['found_portal'] = 'yes'
+          enter()
+          hunger_increases()
+          enter()
+          ch5A = choose(" (1) Enter the portal\n (2) Come out of the closet.\n ")
+          if ch5A in ['1']:
+            print("You stick out your hand through the portal.")
+            enter()
+            print("You can feel cold winds pulling on your arm...")
+            enter()
+            print("The pull gets stronger and is pulling you in.")
+            enter()
+            print("You can hear footsteps behind you, coming closer.")
+            enter()
+            print("*plop*")
+            black_tower()
+          elif ch5A in ['2']:
+            print("You come out of the closet.")
+            enter()
+            print("Before you stands the "+hut_npc+", who is looking at you with a mix of surprise and curiosity.")
+            print()
+            villager()
+
+          
+      
+      elif ch3A in ['2']: #Looked for a weapon
+        print("The hut is littered with small items, none seem like a weapon to you.. you have to be creative.")
+        enter()
+        print("Near the window, there is a desk with two particular items on it.")
+        enter()
+        print("As you rush towards the desk, you can make out red orb which fits into your palm.")
+        enter()
+        print("Besides it lies a scalpel of some sort.")
+        enter()
+        ch5B = choose(" (1) Take the orb\n (2) Take the scalpel\n ")
+        if ch5B in ['1']:
+          player['weapon'] = 'red_orb'
+          print("You quickly reach out for the orb and put it in your pocket while holding it tightly.")
+          enter()
+        elif ch5B in ['2']:
+          player ['weapon'] = 'scalpel'
+          print("You quickly reach out for the scalpel and put it in your pocket while holding it, ready for use.")
+          enter()
+        print("At that same moment, the door of the hut opens behind you.")
+        enter()
+        villager()
+    
+    else:
+      enter_hut_late()
+
+  elif ch2A in ['2']: #Walk around the old hut
+    print("You decide to walk around the old hut first.")
+    enter()
+    print("The hut is small, and seems to be made up of only one room.") 
+    enter()
+    print("its brown roof, covered with straw and moss, forms a steep cone on the round, mudplastered walls.")
+    enter()
+    print("As you carefully walk around the hut, you notice a small glasspane window.")
+    enter()
+    print("You look inside and see a desk, a chair, some pots and pans over a fireplace, and what seems to be a large closet.")
+    enter()
+    
+    if player['race']=='Inepu':
+      print("A trail of a smell enters your nose, tingeling your senses, making you alert.")
+      enter()
+      print("Drool, enters your mouth. Your hunger is strong. Something is near...")
+      enter()
+      ch_hide_follow = choose("Will you follow the smell? Or is it wiser to hide behind the hut?\n\n (1) Follow the smell.\n (2) Hide behind the hut.\n " )
+      
+      if ch_hide_follow in ['1']:
+        print("You cannot ignore your hunger any longer and decide to follow the foul, but irresistable smell.")
+        enter()
+        print("You follow the sparse whiffs for a few quick strides. When you pass a large oaken tree you can vaguely see the outline of what you smelled.")
+        enter()
+        hut_npc = openanswer("In the dim light, you see a creature which you can only describe as a(n): ")
+        print("The "+hut_npc+" walks out of what seems to be a circle of trees. Trees larger than any other you have seen in this forest. A soft red glow radiates from them.")
+        enter()
+        print("You now recognize the smell as blood.. its trail leading into the tree circle.")
+        enter()
+        ch1_forest_4 = choose("The choice is yours...\n (1) Ambush the "+hut_npc+" \n (2) Wait for the "+hut_npc+" to pass and enter the tree circle\n ")
+        if ch1_forest_4 in ['1']:
+          print("With a loud roar, you burst out of your hiding spot and jump on the", hut_npc + ".")
+          enter()
+          print("While you are struggling with the "+hut_npc+", you feel that there is more power to this creature than you thought.")
+          enter()
+          ch1_fight_talk = choose("You can hear the "+hut_npc+" trying to say something to you. What will you do?\n\n (1) Talk to the "+hut_npc+".\n (2) Try to kill the "+hut_npc+".\n ")
+          
+          if ch1_fight_talk in ['1']: #fight
+            enter()
+            print("You release the "+hut_npc+". Who, after panting for a few seconds. Starts talking...")
+            enter()
+            villager()
+
+          
+          else: #talk
+            print("You will not risk the chance of being put under a spell. Through your determination, you gain the upper hand and snap the neck of the "+hut_npc+".")
+            playerchoices['kill_hut_npc'] = 'yes'
+            enter()
+            ch1_5 = choose("\n (1) Devour the "+hut_npc+" \n (2) Leave the corpse to rot\n ")
+            
+            if ch1_5 in ['1']:
+              print("You feast upon the flesh of the "+hut_npc+". When you are done, you are covered in blood.. but satisfied.")
+              hunger_decreases()
+              playerchoices
+            
+            elif ch1_5 in ['2']:
+              hunger_increases()
+              print("You will not fall back to such barbarism.. yet.")
+        
+        if ch1_forest_4 in ['2']:
+          print("The "+hut_npc+" passes you by without noticing you, softly humming a strangely familiar tune in itself.")
+          enter()
+          print("You manage to constraint your instincts and wait for him to fade out of sight. Swiftly, you move into the circle of trees.")
+          print("You look up, the sunlight is blocked out by the entangled branches of the six tall, bloodred trees surrounding you, towering high above you in a circle.")
+          enter()
+          print("In the middle of the circle, you see an altar. You have a bad feeling about this...")
+          enter()
+          ch1_forest_1 = choose("What will you do next?\n (1) Inspect one of the red trees.\n (2) Inspect the altar.\n ")
+          if ch1_forest_1 in ['1']:
+            inspect_tree()
+          if ch1_forest_1 in ['2']:
+            hunger_increases()
+            inspect_altar()
+
+
+      if ch_hide_follow in ['2']:
+        print("Quickly, you sneak to the other side of the hut from where the smell is coming from. You wait...")
+        enter()
+        hunger_increases()
+        enter()
+        print("For a tense few moments, you can hear nothing. Did your senses deceive you?")
+        enter()
+        print("*crack*")
+        enter()
+        print("The presence of another being is announced by the gentle crack of a twig. You hear the sound of footsteps on the soft forest floor.")
+        enter()
+        print("A shadow glides by on the floor. Is it moving to the door? Or was it just a play of the light falling through the forest rooftop?")
+        enter()
+        ch1_1_2_2I = choose("What will you do?\n (1) Enter the hut.\n (2) Continue into the forest.")
+        if ch1_1_2_2I in ['1']:
+          enter_hut_late()
+        if ch1_1_2_2I in ['2']:
+          ch1_forest()
+          
+    
+    else:
+      ch_enterhut_forest = choose("What will you do next?\n\n (1) Enter the hut.\n (2) Leave the hut for what it is and continue into the forest.\n" )
+
+      if ch_enterhut_forest in ['1']:
+        print("The hut seems abandoned. Maybe there is some food hidden inside? You casually walk to the front door and open it. ")
+        enter()
+        print("Once you enter the old hut, you are greeted by an unfamiliar smell...")
+        enter()
+        print("But before you have a chance to investigate the source of this odor, you hear the door closing behind you.")
+        enter()
+        print('\n"Nibble"')
+        enter()
+        print('\n"Nabble"')
+        enter()
+        print('\n"Nouse"')
+        enter()
+        villager()
+
+      if ch_enterhut_forest in ['2']:
+        ch1_forest()
+
+def enter_hut_late(): #enter hut when NPC is already inside
+  hut_npc = openanswer("You swing open the door of the hut. Inside you see something which can only be described by you as a(n)" )
+  print("The "+hut_npc+" stands in front of the closet and seems to barely notice the door opening. Slowly, the "+hut_npc+" turns towards you.")
+  villager()
+
+def ch1_forest(): #continue into the forest with NPC in hut
+  print("Quietly, you take a few steps away from the hut before you start to sprint away into the forest.")
+  enter()
+  print("You run until the old hut is out of sight and you stop for a moment.")
+  enter()
+  hunger_increases()
+  game_over()
+  enter()
+  print("In your haste, you have not noticed the colors of the trees changing.. and the light fading out...")
+  enter()
+  print("You look up, the sunlight is blocked out by the entangled branches of the six tall, bloodred trees surrounding you, towering high above you in a circle.")
+  enter()
+  print("In the middle of the circle, you see an altar. You have a bad feeling about this...")
+  enter()
+  ch1_forest_1 = choose("What will you do next?\n (1) Inspect one of the red trees.\n (2) Inspect the altar.\n ")
+  if ch1_forest_1 in ['1']:
+    inspect_tree()
+  elif ch1_forest_1 in ['2']:
+    enter()
+    inspect_altar()
+
+def inspect_altar():
+  print("As you walk towards the center of the circle, you can see a natural rock, with its top carved off.")
+  enter()
+  print("Small candles surround the rock, being the only source of light in this dank place...")
+  enter()
+  print("In the dim light of the candles, you can see rough, red lines in the stone running from the bottom of the stone to the top of the altar.")
+  enter()
+  print("The red lines come together in a deep, dark pool of red...")
+  enter()
+  print("..with in its center a beating heart.")
+  enter()
+  ch1_forest_3 = choose("A choice awaits you..\n (1) Inspect the red tree\n (2) Eat the heart.\n ")
+  if ch1_forest_3 in ['1']:
+    inspect_tree()
+  elif ch1_forest_3 in ['2']:
+    print("You can't help it. This is a chance to good to pass.")
+    enter()
+    print("You reach out for the heart and grab it. It warmly beats in your palm.")
+    enter()
+    print("As you bring it closer to your mouth, you can feel its pulse increasing, as if it is panicking.")
+    enter()
+    print("Warm blood splashes from your mouth and covers your jaw as you eagerly devour the heart.")
+    enter()
+    print("With every bite, a tingling feeling strikes your heart... but with the last bite the feeling withers.")
+    enter()
+    playerchoices['eat_heart'] = 'yes'
+    hunger_decreases()
+    print("You’re overwhelmed by a warm feeling. As you open your eyes again something’s different…")
+    print("The forest used to be dark and you had a hard time seeing anything before you.")
+    print("But now… Things had never been so clear. Nothing escapes your eyes.")
+    player['soulvision'] = 'yes'
+    enter()
+    print('"Heh."')
+    enter()
+    print("You turn around to face the sudden sound you heard.")
+    enter()
+    print("From the darkness created by the trees shuffles forward a creature. Its features are hard to see in the dim candlelight.")
+    enter()
+    villager()
+
+def inspect_tree():
+  print("You walk carefully towards one of the red trees, wary of anything that might ambush you.")
+  enter()
+  print("The treetrunk is thick and wide. Its bark is unnaturally slick, and almost radiating.")
+  enter()
+  ch1_forest_2 = choose("What will you do?\n (1) Climb the red tree.\n (2) Inspect the altar\n ")
+  if ch1_forest_2 in ['1']:
+    print("You spread your claws and jam them into the slick, red bark of the tree and start to climb the tree.")
+    enter()
+    print("Everytime you move your claws higher and penetrate the radiating skin of the tree, a tremor follows from deep inside its core...")
+    enter()
+    print("After clawing your way half up the tree, you can start to see light shining through the treetop. You reach for one of the branches...")
+    enter()
+    print("As you grab the branch, you try to pull yourself up. Using what remains of your strength you manage t-")
+    print("\n*CRACK*")
+    enter()
+    if player['race']=='Amun':
+      print("Before you realize it, you are falling...")
+      enter()
+      print("..but you manage to spread your wings out wide just meters before you hit the forest floor.")
+      enter()
+      print("Almost with grace, you land near the altar.")
+      inspect_altar()
+    else:
+      player['health'] = player['health']-1
+      game_over()
+      inspect_altar
+
+
+  elif ch1_forest_2 in ['2']:
+    inspect_altar()
+
+def mountain_cave(): #Enter the cave
+  print("You enter the cave.")
+  enter()
+  print("What little light you had coming through the tall forest trees does not reach far inside the cave.")
+  enter()
+  print("After a few strides, you notice the darkness surrounding you.")
+  enter()  
+  ch_cave_enter = choose(" What will you do?\n\n (1) Go back outside.\n (2) Continue into the cave.\n ")
+      
+  if ch_cave_enter in ['1']: #Went back outside of the cave
+    hunger_increases() #player wasted time
+    enter()
+    print("You turn around and leave the cave for what it is. A dark and dank place.")
+    enter()
+    print("You look up to the mountain, the winds are blowing hard up there.")
+    enter()
+    ch4B = choose("Will you scale the mountainside or will you go back to that hut you saw earlier?\n\n (1) Scale mountain\n (2) Go back to the old hut.\n " )
+        
+    if ch4B in ['1']: #Climb mountain after cave
+      climb_mountain()
+    
+    if ch4B in ['2']: #Go to hut after cave
+      hunger_increases()
+      old_hut()
+      
+  elif ch_cave_enter in ['2']: #Continue inside cave
+    print("You continue exploring the cave.")
+    enter()
+    
+    if player['race']=='Inepu': #Inepu uses smell to navigate the cave
+      print("In the dark, you can see nothing...")
+      enter()
+      print("... but your other senses become stronger.")
+      enter()
+      print("Your strong nose picks up a scent deep within the cave. Carefully, you follow the smell while following one side of the cave.")
+      enter()
+      print("After what feels likes minutes of walking, you can feel that the cave splits into two paths, each with their own smell...")
+      enter()
+      ch_cave_split_inepu = choose("What smell will you follow?\n\n (1) A curious bitterness\n (2) A smell that makes you think of a past you hardly remembered\n")
+      enter()
+      
+      if ch_cave_split_inepu in ['1']: #Followed the foul smell
+        print("You follow the bitter smell down into the cave. You can hear flapping sounds. Will there be food here?")
+        enter()
+        hunger_increases()
+        enter()
+        print("With your increasing hunger, you increase your pace. The flapping sounds around you become louder, but you cannot see where they come from. Every step you take becomes harder, as your legs sink away deeper in what first appeared to be just mud.")
+        enter()
+        print("When you realise it, it is too late. When you try to turn around, you slip and fall into the excrements of the flying bat creatures. As you struggle to keep your head above the dung, you can feel tiny paws crawling over your face and into your mouth.")
+        enter()
+        print("At least you had something to eat, you think.")
+        enter()
+        player['health'] = 0
+        game_over()
+                
+      if ch_cave_split_inepu in ['2']: #Followed the sweet smell
+        print("You follow the familiar smell. Your mouth starts to water, your tongue hanging out on one side.")
+        enter()
+        chapter1_ending_cave()
+    
+    else:
+      print("The dark is becoming thicker, entering your mind as you clumsily follow the wall of the cave deeper into the mountain. You find it hard to think...")
+      enter()
+      print("After what feels like hours, you can determine that the cave splits into two paths. You cannot turn back now.. You stumble into a path at random.")
+      enter()
+      
+      ch_cave_split = random.randint(1,2)
+      
+      if ch_cave_split == 1:
+        print("When you realise it, it is too late. When you try to turn around, you slip and fall into the excrements of the flying bat creatures. As you struggle to keep your head above the dung, you can feel tiny paws crawling over your face and into your mouth, tickling your uvula...")
+        enter()
+        print("At least you had something to eat, you think.")
+        enter()
+        player['health'] = 0
+        game_over()
+      if ch_cave_split == 2:
+        chapter1_ending_cave()
+
+def climb_mountain():  #Climb the mountain
+  print("You attempt to climb the mountain. The wind is howling stronger with every step.")
+  enter()
+  print("About half way up the slope, you turn around to see the forest.")
+  enter()
+  print("In the twilight of the day, as far as you can see are tall oak trees, their heads shrouded in yellow and red.")
+  enter()
+  print("The white-capped mountain range where you are standing on extends as far as your eyes can see them, until they dissapear in a wall of mist.")
+  enter()
+  print("Suddely you hear a loud crashing sound.")
+  enter()
+  print("When you turn around you see two giant boulders rolling down the hill towards you.")
+  ch3B = choose(" (1) Try to jump over the boulders.\n (2) Brace yourself and try to stop the boulders in place with your arms.\n ")
+
+  if ch3B in ['1']: #Tried to jump
+    if player['race'] == "Amun":
+      print("You spread your winged arms, and jump high over the boulder to land on the other side unharmed.")
+      enter()
+      print("You can see the boulders rolling down the hill, through the trees.")
+      enter()
+      print("It sounds as if the boulders crashed into something. No matter, you are in this desolate place and need to find food fast.")
+      enter()
+      print("You continue with a steady pace up the mountain, jumping from rock to rock.")
+      print("Once you reach the rocky summit, you are greeted by a chilling gust of wind.")
+      enter()
+      print("You turn your back to the winds and look from this great height toward the valley.")
+      enter()
+      print("It’s a vast, never ending forest. You feel better here, closer to the sun.")
+      hunger_increases()
+      ch4A = choose("What will you do next?\n (1) Scout the summit for food\n (2) Spread your wings and glide down to the forest\n ")
+      if ch4A in ['1']:
+        print("The summit has a thick layer of snow with rocks sticking out here and there. You jump atop one nearby.")
+        enter()
+        print("In the distance, you can see a long, black shape amidst jagged rocks.")
+        enter()
+        print("There is nothing else here, so you make your way towards this oddly placed tower.")
+        enter()
+        print("You wade through the knee-deep snow for a few strides until your march is stopped by a sharp sting.")
+        enter()
+        print("An odd object is pointing out of the snow, which is now slowly turning red.")
+        enter()
+        print("A little light headed, you see something which looks like a long white-greyish pole covered under ice crystals.")
+        enter()
+        ch4B = choose("\n (1) Try to dig it out.\n (2) Set your teeth in it.\n ")
+        if ch4B in ['1']:
+          print("With the last of your energy, you dig up the pole.")
+          enter()
+          print("You start to lose feeling in your fingers, but you ignore it.")
+          enter()
+          print("Finally, you lift what turns out to be a spear of some sort.")
+          enter()
+          print("The weight of it is just perfect. You stab the air a few times. It’s time to hunt.")
+          enter()
+          print("You look around. Your body is at its limit.")
+          enter()
+          ch4C = choose("\n (1) There must be more artifacts nearby. Scavenge the rest of your surrounding.\n (2) Push on towards the black tower.\n ")
+          if ch4C in ['1']:
+            print("While on your knees you become calm. You hear laughter. There’s no cold anymore, no hunger.")
+            enter()
+            print("You realize it is you who is laughing. You don’t know after how long it happens but darkness closes in on you.")
+            player['health'] = 0
+            game_over()
+          elif ch4C in ['2']:
+            black_tower()
+        if ch4B in ['2']:
+          print("The pole is hard, cold and sharp. Your beak is frozen to the tip of what you can now see is a spear.")
+          enter()
+          hunger_increases()
+          game_over()
+
+
+      if ch4A in ['2']:
+        print("You have found nothing to eat and nothing of value here, but the strong winds may still carry you.")
+        enter()
+        print("You jump high and spread your wings wide. Once again, you feel the soft winds rustling your feathers.")
+        enter()
+        print("For a moment, you feel glorious.")
+        enter()
+        print("A strong wind suddenly catches you and pushes you down to the treetops quicker than anticipated.")
+        enter()
+        print("You have no choice but to make a landing. Luckily, you spot a circle of trees where the rooftop is covered with leafs only.")
+        enter()
+        print("You hover for a moment atop the red leafs, then straighten up and drop yourself through it.")
+        enter()
+        print("You drop to one knee to cushion the landing. The impact is hard, but nothing you can't handle. You look up.")
+        enter()
+        inspect_altar()
+
+
+    
+    else:
+      print(" You react quickly and jump, only to bounce off against the boulders.") 
+      enter()
+      print("You hit the mountainside hard. You curse yourself for your overconfidence.")
+      enter()
+      print("You try to stand up.. but you fail to do so.")
+      enter()
+      print("You look down to see your legs lying lifeless in an unnatural position.")
+      enter()
+      player['health'] = player['health']-1
+      player['legs'] = 'broken'
+      game_over()
+      ch3C = choose("What will you do next? \n (1) Let yourself roll down the mountain\n (2) Drag yourself further up the mountain\n ")
+      if ch3C in ['1']:
+        print("You shift yourself in a sideways position and roll slowly down the mountain until you hit the plateau to which the cave opens.")
+        enter()
+        print("You can't feel your legs, but you know that the rolling has left your legs beyond repair.")
+        enter()
+        print("Your legs are connected only with a few ragged muscles to your rump.")
+        enter()
+        hunger_increases()
+        enter()
+        game_over()
+        ch3D = choose("What will you do?\n (1) Eat your legs\n (2) Drag yourself towards the cave entrance\n ")
+        if ch3C in ['1']:
+          print("With one hand you grab one of the many sharp rocks lying around you.")
+          enter()
+          print("With the other, you yank your ravaged legs up.")
+          enter()
+          print("Memories of your first steps into the splendid halls of your lord father flash through your head with every desparate strike of the stone.")
+          enter()
+          player['legs'] = 'amputated'
+          print("You can hardly control yourself when you shred through your own flesh, throwing your head backwards to gobble the blood-seeping flesh down.")
+          enter()
+          hunger_decreases()
+          enter()
+          ch3C6 = choose("You look up to see that you are back at the entrance of the cave again. You could go in there for shelter... or maybe go to the old hut?\n (1) Crawl into the cave.\n (2) Crawl into the forest, towards the old hut.\n ")
+          if ch3C6 in ['1']:
+            print("With your strenght somewhat renewed, and your burden lightened it still takes considerable effort to walk on your hands towards the cave... but you make it.")
+            enter()
+            mountain_cave()
+          if ch3C6 in ['2']:
+            print("With your strenght somewhat renewed, and your burden lightened it still takes considerable effort to walk on your hands towards the edge of the forest... but you make it.")
+            enter()
+            print("Dusk is falling over the forest as you make your way back to the same place as where you started.")
+            enter()
+            print("You think about your lifechoices as you take a rest from the long walk without legs, as you hear a sniffling sound, followed by a deep growling from a bush near you.")
+            enter()
+            print("A wolf jumps from the bush, it's fur black as jet, it's teeth yellow as the moon.")
+            ch3C7 = choose("What is your reaction?\n (1) Scream\n (2) Reach for your weapon\n ")
+            if ch3C in ['1']:
+              print("You let it all out. The pain, the confusion. It is all just reaching you now as you the wolfs fangs bite hard into your bloody waist.")
+              enter()
+              print("Crying out, you curse the ground you lie on. The ground your blood seeps into.")
+              enter()
+              print("Your ungodly cry carries deep into the forest as the beast drags you away.")
+              enter()
+              print("As your sight fades, your bloodtrail becomes brighter.")
+              enter()
+              print("The ground splits open where your blood was.")
+              enter()
+              player['bloodmage'] = 'yes'
+
+        if ch3C in ['2']:
+          print("You drag yourself towards the cave entrance, your legs a lifeless burden, but you are still too attached to them.")
+      if ch3C in ['2']:
+        print("Determined, you drag yourself over the rough face of the mountain, giving your body a bloody scrub.")
+        enter()
+        print("You have come this far to search for food, perhaps beyond this mountain you will find it? Or at least, help.")
+        enter()
+        print("Not long after spotting the summit, you feel the pleasant touch of cold upon your skin.")
+        enter()
+        print("Snow starts to appear, first in patches, then in a increasingly thick carpet.")
+        enter()
+        print("With relative ease, you now slide yourself up the mountain, grabbing hold of every rock you find.")
+        enter()
+        print("You think back to days long gone. To when you still had working legs. To when you climbed your lord fathers tower...")
+        enter()
+        print("You snap out of your daydreams by the sudden sight of something you did not expect to find here...")
+        enter()
+        print("A black tower, amidst the now howling snows. A light, flickering at the top.")
+  elif ch3B in ['2']: #Tried to stop the boulders
+    print("You gather your remaining strenght and brace yourself for impact. Remember your training. Your murmur to yourself.")
+    enter()
+    print("Your murmurs turn into an echoing scream as the boulders crush your body, leaving it to turn into dust.")
+    enter()
+    player['health'] = 0
+    game_over()
+
+def chapter1_ending_cave():
+  print("Just the faintest light, which now seems to burn as bright as the brightest beacon, greets you in the distance. As if hypnothized, you follow the light.")
+  enter()
+  print("As you approach the end of the tunnel, you can make out a wooden door, with light shining behind it. You open the door.")
+  enter()
+  villager()      
+
+def black_tower():
+  print("Before you looms the black tower.")
+  enter()
+  print("Cold winds are howling around you on this icy mountaintop, cutting right through skin, fur, feather and bone.")
+  enter()
+  print("You approach the black tower... wading through a waiste deep layer of snow. How will you proceed?")
+  tower1 = choose(" (1) Kick in the door.\n (2) Knock on the door.\n ")
+  if tower1 in ['1']:
+    print('With a lot of anger, you kick in the door. Snow blows into the tower, making the delicately woven banners you find inside wave violently.')
+    playerchoices['knocked'] = 'yes'
+    enter()
+    villager()
+  else:
+    print('You gently knock on the door.')
+    enter()
+    print('After just seconds, the door is opened.')
+    enter()
+    villager()
+
+
+def ch0():
+  ##Chapter 0: Character creation
+  print("-----------------------------")
+  print("Chapter 0: Character creation")
+  print("-----------------------------")
+  
+  time.sleep(1)
+  
+  player['weapon','race','legs','soulvision','bloodmage'] = None
+  playerchoices['hut_mountain','kill_hut_npc','eat_heart', 'found_portal','devour_npc'] = None
+
+
+  name = openanswer("Choose a name: ") 
+  print("\nHello,", name + ". Welcome to this world.")
+  print("\nPress enter to continue to the next line.")
+  enter()
+  print("You will need to make decisions, some small and insignificant, some large and life-altering.")
+  enter()
+  print("You will start with only your name,", name + "...")
+  enter()
+  print("In this world you will find your true character.")
+  enter()
+
+def ch1():
+  ##Chapter 1: Hunger
+  print("------------------")
+  print("Chapter 1: Hunger")
+  print("------------------")
+
+  player['health'] = 2
+  player['hunger'] = 1
+
+  enter()
+  print("You are lost in an old forest. You are hungry and must look for something to eat... but where?")
+  enter()
+
+
+  #ch1A: Hut / Mountains
+
+  ch1A = choose(" (1) You can see an old hut through the trees in the distance.\n (2) Behind you, you can see the snow-capped mountains towering above the forest.\n\nWhere do you go?\n ")
+
+  #Approach old hut
+  if ch1A in ['1']:
+    playerchoices['hut_mountain'] = 'hut'
+    print("You walk towards the old hut.")
+    enter()
+    race_selection()
+    enter()
+    old_hut()
+
+  #Approach mountains
+  elif ch1A in ['2']:
+    print("You turn around and make your way towards the mountains.")
+    enter()
+    race_selection()
+    enter()
+    print("You make your way to the foot of the mountain, which rises up more steeply than you anticipated from afar.") 
+    enter()
+    print("Your eyes are drawn to a large crack in the mountainside, forming a narrow cave.")
+    ch2B = choose(" (1) Enter the cave.\n (2) Climb the mountain.\n ")
+    if ch2B in ['1']: #Entered cave
+      mountain_cave()
+    elif ch2B in ['2']: #Climb mountain
+      climb_mountain()
+
+## Chapter 2:
+def ch2():
+  print("-----------------------------")
+  print("Chapter 2: Glimpse")
+  print("-----------------------------")
+
+  print("You have reached the end of this game thus far developed. Thank you for playtesting. Please play again to discover another path.")
+  enter()
+  play = False
+
+def game():
+  ch0()
+  ch1()
+  ch2()
+
+
+while play:
+  game()
+
